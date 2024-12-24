@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>작렬! 정신통일 두뇌의 벽</title>
+  
+  <!-- TensorFlow.js 및 모델 스크립트 -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix"></script>
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      overflow: hidden;
+    }
+
+    #intro-container {
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #intro-container h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    #intro-container p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    #start-button {
+      background-color: #007bff;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #start-button:hover {
+      background-color: #0056b3;
+    }
+
+    #game-container {
+      display: none;
+      text-align: center;
+      position: relative;
+      height: 100vh;
+    }
+
+    #status-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      text-align: right;
+      color: #333;
+    }
+
+    #score, #timer {
+      font-size: 48px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    h1 {
+      margin: 20px 0;
+      color: #333;
+    }
+
+    #pose-image {
+      max-width: 300px;
+      margin: 20px 0;
+    }
+
+    canvas {
+      border: 2px solid #000;
+      display: block;
+      margin: 0 auto;
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Intro 화면 -->
+  <div id="intro-container">
+    <h1>작렬! 정신통일 두뇌의 벽</h1>
+    <p>표시되는 이미지에 맞춰 포즈를 취하고 점수와 시간을 얻으세요!<br>
+       포즈를 1초동안 유지해야 통과됩니다. Good luck!</p>
+    <button id="start-button">Start Game</button>
+  </div>
+
+  <!-- 게임 화면 -->
+  <div id="game-container">
+    <div id="status-container">
+      <div id="score">Score: 0</div>
+      <div id="timer">Time Left: 10s</div>
+    </div>
+    <h1><strong>작렬! 정신통일 두뇌의 벽</strong></h1>
+    <img id="pose-image" src="" alt="Pose Image" />
+    <canvas id="canvas" width="640" height="480"></canvas>
+  </div>
+
+</body>
+</html>
